@@ -22,6 +22,24 @@ import java.nio.file.Paths;
  */
 public class MarkDownRenderer implements Renderer {
    File source;
+   String title;
+
+   /**
+    * get the current title for the resume
+    * @return a <code>String</code> containing the current page title
+    */
+   public final String getTitle() {
+      return title;
+   }
+
+   /**
+    * set the title for the resume
+    *
+    * @param title a <code>String</code> containing the title
+    */
+   public final void setTitle(final String title) {
+      this.title = title;
+   }
 
    /**
     * Creates a new <code>MarkDownRenderer</code> instance.

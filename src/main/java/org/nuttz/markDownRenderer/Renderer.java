@@ -18,5 +18,7 @@ public interface Renderer {
    public void renderToStream(OutputStream stream) throws IOException;
    public void setSource(String filename) throws FileNotFoundException;
    public String getSource();
+   public String getTitle();
+   public void setTitle(String title);
 }
 

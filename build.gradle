@@ -19,14 +19,23 @@ bootJar {
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 
+configurations.all {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    exclude group: 'org.springframework.boot', module: 'logback-classic'
+}
+    
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
     compile 'com.vladsch.flexmark:flexmark-all:0.34.24'
     compile 'com.vladsch.flexmark:flexmark-pdf-converter:0.34.24'
+    compile 'com.vladsch.flexmark:flexmark-docx-converter:0.34.24'
     compile 'com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC13'
     compile 'com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC13'
     compile 'com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC13'
+    compile 'org.docx4j:docx4j:3.3.6'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1' 
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'

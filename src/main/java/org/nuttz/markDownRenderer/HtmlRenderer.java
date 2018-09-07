@@ -19,25 +19,6 @@ import java.io.OutputStreamWriter;
  * @version 1.0
  */
 public class HtmlRenderer extends MarkDownRenderer {
-   private String title;
-
-   /**
-    * get the current title for the resume
-    * @return a <code>String</code> containing the current page title
-    */
-   public final String getTitle() {
-      return title;
-   }
-
-   /**
-    * set the title for the resume
-    *
-    * @param title a <code>String</code> containing the title
-    */
-   public final void setTitle(final String title) {
-      this.title = title;
-   }
-
    /**
     * Sends the rendered HTML to the passed <code>OutputStream</code>
     *

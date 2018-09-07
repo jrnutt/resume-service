@@ -25,6 +25,7 @@ public class App {
          public void writeTo(OutputStream outputStream) throws IOException {
             Renderer r = new org.nuttz.markDownRenderer.MarkDownRenderer();
             r.setSource("/home/jim/sync/JamesNuttResume.markdown");
+            r.setTitle("Resume of James Raymond Nutt");
             r.renderToStream(outputStream);
          }
       };
@@ -35,8 +36,9 @@ public class App {
       return new StreamingResponseBody() {
          @Override
          public void writeTo(OutputStream outputStream) throws IOException {
-            Renderer r = new org.nuttz.markDownRenderer.PdfRenderer();
+            Renderer r = new org.nuttz.markDownRenderer.DocXRenderer();
             r.setSource("/home/jim/sync/JamesNuttResume.markdown");
+            r.setTitle("Resume of James Raymond Nutt");
             r.renderToStream(outputStream);
          }
       };
@@ -49,6 +51,7 @@ public class App {
          public void writeTo(OutputStream outputStream) throws IOException {
             Renderer r = new org.nuttz.markDownRenderer.PdfRenderer();
             r.setSource("/home/jim/sync/JamesNuttResume.markdown");
+            r.setTitle("Resume of James Raymond Nutt");
             r.renderToStream(outputStream);
          }
       };
@@ -61,6 +64,7 @@ public class App {
          public void writeTo(OutputStream outputStream) throws IOException {
             Renderer r = new org.nuttz.markDownRenderer.HtmlRenderer();
             r.setSource("/home/jim/sync/JamesNuttResume.markdown");
+            r.setTitle("Resume of James Raymond Nutt");
             r.renderToStream(outputStream);
          }
       };
