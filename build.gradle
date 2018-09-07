@@ -23,6 +23,7 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
     compile 'com.vladsch.flexmark:flexmark-all:0.34.24'
+    compile 'com.vladsch.flexmark:flexmark-pdf-converter:0.34.24'
     compile 'com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC13'
     compile 'com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC13'
     compile 'com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC13'

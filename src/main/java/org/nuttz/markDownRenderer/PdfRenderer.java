@@ -1,5 +1,16 @@
 package org.nuttz.markDownRenderer;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.FileReader;
+
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.pdf.converter.PdfConverterExtension;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
+
+
 /**
  * Describe class PdfRenderer here.
  *
@@ -11,6 +22,27 @@ package org.nuttz.markDownRenderer;
  */
 public class PdfRenderer extends MarkDownRenderer {
 
+   static final MutableDataHolder OPTIONS = new MutableDataSet();
+
+   private String title;
+
+   /**
+    * get the current title for the resume
+    * @return a <code>String</code> containing the current page title
+    */
+   public final String getTitle() {
+      return title;
+   }
+
+   /**
+    * set the title for the resume
+    *
+    * @param title a <code>String</code> containing the title
+    */
+   public final void setTitle(final String title) {
+      this.title = title;
+   }
+
    /**
     * Creates a new <code>PdfRenderer</code> instance.
     *
@@ -19,4 +51,21 @@ public class PdfRenderer extends MarkDownRenderer {
 
    }
 
+   /**
+    * Writes the rendered PDF to an <code>OutputStream</code>
+    *
+    * @param outputStream an <code>OutputStream</code> value
+    * @exception IOException if an error occurs
+    */
+   @Override
+   public void renderToStream(final OutputStream outputStream) throws IOException {
+      Parser parser = Parser.builder().build();
+      Node document = parser.parseReader(new FileReader(source));
+      com.vladsch.flexmark.html.HtmlRenderer renderer = com.vladsch.flexmark.html.HtmlRenderer.builder().build();
+      StringBuilder html = new StringBuilder("<html><head><title>");
+      html.append(title);
+      html.append("</title></head><body>");
+      html.append(renderer.render(document)).append("</body></html>");
+      PdfConverterExtension.exportToPdf(outputStream, html.toString(),"resume.pdf", OPTIONS);
+   }
 }

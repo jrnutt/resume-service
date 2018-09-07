@@ -15,9 +15,7 @@ import java.io.Writer;
  * @version 1.0
  */
 public interface Renderer {
-   public String renderToString() throws IOException;
    public void renderToStream(OutputStream stream) throws IOException;
-   public void renderToStream(Writer stream) throws IOException;
    public void setSource(String filename) throws FileNotFoundException;
    public String getSource();
 }

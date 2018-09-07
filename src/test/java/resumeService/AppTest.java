@@ -22,7 +22,7 @@ public class AppTest {
 
     @Test
     public void helloGradle() throws Exception {
-        mvc.perform(get("/"))
+        mvc.perform(get("/resume.markdown"))
            .andExpect(status().isOk());
     }
 

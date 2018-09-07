@@ -1,16 +1,13 @@
 package org.nuttz.markDownRenderer;
 
 import java.io.FileReader;
-import java.io.File;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.Parser;
 
 import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.Writer;
-import java.io.OutputStreamWriter;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  * Renders a markdown file as HTML
@@ -24,15 +21,31 @@ import java.io.OutputStream;
 public class HtmlRenderer extends MarkDownRenderer {
    private String title;
 
+   /**
+    * get the current title for the resume
+    * @return a <code>String</code> containing the current page title
+    */
    public final String getTitle() {
       return title;
    }
 
+   /**
+    * set the title for the resume
+    *
+    * @param title a <code>String</code> containing the title
+    */
    public final void setTitle(final String title) {
       this.title = title;
    }
 
-   public String renderToString() throws IOException {
+   /**
+    * Sends the rendered HTML to the passed <code>OutputStream</code>
+    *
+    * @param writer an <code>OutputStream</code> destination
+    * @exception IOException if an error occurs
+    */
+   @Override
+   public void renderToStream(OutputStream stream) throws IOException {
       Parser parser = Parser.builder().build();
       Node document = parser.parseReader(new FileReader(source));
       com.vladsch.flexmark.html.HtmlRenderer renderer = com.vladsch.flexmark.html.HtmlRenderer.builder().build();
@@ -40,16 +53,7 @@ public class HtmlRenderer extends MarkDownRenderer {
       html.append(title);
       html.append("</title></head><body>");
       html.append(renderer.render(document)).append("</body></html>");
-      return html.toString();
-   }
-
-   public void renderToStream(OutputStream stream) throws IOException {
       OutputStreamWriter osw = new OutputStreamWriter(stream);
-      renderToStream(osw);
-   }
-   
-   public void renderToStream(Writer osw) throws IOException {
-      String html = renderToString();
-      osw.write(html, 0, html.length());
+      osw.write(html.toString());
    }
 }

@@ -34,21 +34,6 @@ public class MarkDownRenderer implements Renderer {
    // Implementation of org.nuttz.markDownRenderer.Renderer
 
    /**
-    * Copies the source to the passed <code>Writer</code>
-    *
-    * @param writer a <code>Writer</code> destination
-    * @exception IOException if an error occurs
-    */
-   public void renderToStream(final Writer writer) throws IOException {
-      List<String> lines = Files.readAllLines(Paths.get(source.getPath()));
-      // I would use a lambda here and foreach, but that doesn't
-      // handle exceptions properly
-      for (String line : lines) {
-         writer.write(line);
-      }
-   }
-
-   /**
     * Describe <code>renderToStream</code> method here.
     *
     * @param outputStream an <code>OutputStream</code> value
@@ -56,17 +41,6 @@ public class MarkDownRenderer implements Renderer {
     */
    public void renderToStream(final OutputStream outputStream) throws IOException {
       Files.copy(Paths.get(source.getPath()), outputStream);
-   }
-
-   /**
-    * Describe <code>renderToString</code> method here.
-    *
-    * @return a <code>String</code> value
-    * @exception IOException if an error occurs
-    */
-   public String renderToString() throws IOException {
-      List<String> lines = Files.readAllLines(Paths.get(source.getPath()));
-      return String.join("\n",lines);
    }
 
    /**
